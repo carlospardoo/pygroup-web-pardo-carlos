@@ -1,0 +1,21 @@
+#Comando para enlistar paquetes
+pip list
+
+#Instalar entorno virtual
+pip install venv
+pip3 install virtualenv
+
+#Crear directorio de entorno virtual
+python -m venv test
+python -m virtualenv test
+
+#Activar entorno virtual
+test\Scripts\activate
+
+pip list
+
+pip install flask
+
+pip install -r requirements.txt
+
+deactivate
