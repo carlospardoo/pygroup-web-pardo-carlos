@@ -152,7 +152,8 @@ Con ello se cierra el entorno virtual y la consola vuelve a su estado base.
 6. Creando un commit.
 
 ```
-    git commit -m ""
+    git commit -m "Creación del repositorio. Agregado taller de la
+primera sesion"
  ```
 
 7. Haciendo un push sobre el repositorio.
