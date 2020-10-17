@@ -162,7 +162,7 @@ primera sesion"
 7. Haciendo un push sobre el repositorio.
 
 ```
-    git push 
+    git push https://github.com/carlospardoo/pygroup-web-pardo-carlos.git
  ```
 
 8. Clonando repositorio.
