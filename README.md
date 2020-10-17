@@ -116,6 +116,9 @@ Con ello se cierra el entorno virtual y la consola vuelve a su estado base.
 
 #### Construido con
 
+* [virtualenv] - Utilizado para crear entornos virtuales de python.
+
+* [Flask] - Paquete agregado para probar el entorno virtual.
 
 #### Versionado - Comandos básicos de Git utilizados
 
