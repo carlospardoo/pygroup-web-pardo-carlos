@@ -170,3 +170,7 @@ primera sesion"
 ```
     git clone 
  ```
+
+### 2. Semana2-HTTP - Investigación HTTP
+
+Ivestigación referente a los tipos de peticiones de HTTP y los códigos de respuesta HTTP.
