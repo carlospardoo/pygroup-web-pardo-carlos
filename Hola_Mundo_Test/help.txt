@@ -12,10 +12,15 @@ python -m virtualenv test
 #Activar entorno virtual
 test\Scripts\activate
 
+#Instalar paquetes
 pip list
 
 pip install flask
 
 pip install -r requirements.txt
 
+#Desactivar entorno virtual
 deactivate
+
+#Correr flask
+python URL
