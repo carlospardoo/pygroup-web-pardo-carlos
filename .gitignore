@@ -1,2 +1,3 @@
 \test
-\proyecto_flask\env
+\env
+\__pycache__

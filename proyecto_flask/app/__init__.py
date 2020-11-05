@@ -1,9 +1,8 @@
 from flask import Flask
+from products.views import prods
 
 app = Flask(__name__)
-
-#from app.products import views
-#from app.products import products
+app.register_blueprint(prods)
 
 if __name__ == '__main__':
     app.run(debug=True)
