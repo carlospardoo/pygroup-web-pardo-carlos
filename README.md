@@ -174,3 +174,62 @@ primera sesion"
 ### 2. Semana2-HTTP - Investigación HTTP
 
 Ivestigación referente a los tipos de peticiones de HTTP y los códigos de respuesta HTTP.
+
+### 3. Tarea Vistas en Proyecto Flask
+
+Taller donde se cargará en el navegador un mensaje u otro según el parámetro dado. Consulta adicional sobre el método render_template.
+
+#### Instalación
+
+1. Dirigirse a la carpeta **proyecto_flask** con el siguiente comando.
+
+```
+cd proyecto_flask
+```
+2. Ejecutar el siguiente comando para iniciar el entorno virtual **env**.
+
+```
+env\Scripts\activate
+```
+3. Si es la primera vez que se ejecuta el entorno virtual, instalar paquetes especificados en requirements.txt. en caso contrario, omitir este paso.
+
+```
+pip install -r requirements.txt
+```
+
+4. Iniciar la ejecución del proyecto con el siguiente comando.
+
+```
+python app\__init__.py
+```
+
+#### Despliegue
+
+Cuando inicia la aplicación aparece la ruta por defecto donde correrá.
+
+```
+Running on http://127.0.0.1:5000/
+```
+
+Sin embargo, al cargar dicha ruta en el navegador no aparecerá nada. Ello es porque no se ha configurado ninguna vista para ser cargada en la ruta principal.
+
+Para correr el taller se debe utilizar la siguiente ruta.
+
+```
+http://127.0.0.1:5000/prod/carlos
+```
+El taller correrá en la ruta prod seguido de cualquier nombre especificado (en este caso es **carlos**, pero puede ser cualquier otro nombre).
+
+#### Ejecutando las pruebas
+
+1. Cuando se carga la ruta con cualquier nombre como parámetro diferente de pygroup, por ejemplo **carlos** aparecerá el siguiente mensaje.
+
+```
+Felicitaciones! Trabajo exitoso carlos
+```
+
+2. Cuando se carga la ruta con el nombre **pygroup**, aparecerá el siguiente mensaje.
+
+```
+Error! No se puede utilizar el nombre pygroup
+```
