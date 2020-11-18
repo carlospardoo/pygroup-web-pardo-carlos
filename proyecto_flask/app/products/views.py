@@ -30,9 +30,22 @@ Se utiliza así:
         return render_template("hola.html",vars=variable)
 """
 
-from flask import Blueprint, Response
+from flask import Blueprint, Response, request
 
-prods = Blueprint('prods',__name__,url_prefix='/prod')
+from products.models import get_all_categories, create_new_category, get_all_products
+
+prods = Blueprint('prods',__name__,url_prefix='/prod')#estos nombre de rutas son ignorados
+
+#Estándares de nuestro proyecto
+EMPTY_SHELVE_TEXT = "Empty shelve!"
+PRODUCTS_TITLE = "<h1> Products </h1>"
+DUMMY_TEXT = "Dummy method to show how Response works"
+RESPONSE_BODY = {
+    "message": "",
+    "data": [],
+    "errors": [],
+    "metadata": []
+}
 
 @prods.route('/<name>',methods=['GET'])
 def tareaVistas(name):
@@ -56,4 +69,37 @@ def tareaVistas(name):
     else:
         return Response('Error! No se puede utilizar el nombre pygroup',status=400)
 
+@prods.route('/categories')
+def get_categories():
+    """
+    
+    """
+    categories=get_all_categories()
+    RESPONSE_BODY["message"] = "OK"
+    RESPONSE_BODY["data"] = categories
 
+    return RESPONSE_BODY, 200
+
+@prods.route('/add-category',methods=["POST"])
+def addCategory():
+    """
+    
+    """
+    if request.method=="POST":
+        data = request.json
+        category = create_new_category(data["name"])
+
+        RESPONSE_BODY["message"] = "Category Created"
+        return RESPONSE_BODY, 201
+        #return Response("Category created",status=201)#Manera alterna de responder
+
+@prods.route('/productlist',methods=["GET"])
+def get_products():
+    """
+    
+    """
+    productos = get_all_products()
+    RESPONSE_BODY["data"] = productos
+    RESPONSE_BODY["message"] = "Products list"
+
+    return RESPONSE_BODY, 200
