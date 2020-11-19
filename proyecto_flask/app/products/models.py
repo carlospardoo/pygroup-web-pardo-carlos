@@ -36,6 +36,7 @@ class Stock(db.Model):
 class CategorySchema(ma.SQLAlchemyAutoSchema):
     class Meta:#Meta es información adicional para python
         model = Category
+        fields = ["id","name"]#Para que muestre solo los campos que se quieran
 
 class ProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
@@ -49,12 +50,14 @@ def get_all_categories():
 
 def get_all_products():
 
-    products = Product.query.all()#query select *from product
-    product_schema = ProductSchema()
+    products = Product.query.all()#query select *from product 
+    product_schema = ProductSchema()#Lo formatea como un objeto
     produs = [product_schema.dump(product) for product in products]
     return produs
 
 def create_new_category(name):
+    """
+    """
     category = Category(name=name)
     db.session.add(category)#Método de flask para insertar
 
@@ -62,4 +65,26 @@ def create_new_category(name):
         return category
     
     return None
+
+def create_new_product(name,price,weight,description,refundable,category_id):
+    """
+    """
+    category = Category.query.filter(id==category_id)
+
+    if category != [] :
+        producto = Product(name=name,price=price,weight=weight,description=description,refundable=refundable,category_id=category_id)
+        db.session.add(producto)
+
+        if db.session.commit():
+            return producto
+
+
+    return None
+
+
+def get_product_by_id(id):
+    product_qs = Product.query.filter_by(id=id).first()
+    product_schema = ProductSchema()
+    p = product_schema.dump(product_qs)
+    return p
 

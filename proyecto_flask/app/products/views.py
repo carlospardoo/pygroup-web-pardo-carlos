@@ -32,7 +32,7 @@ Se utiliza así:
 
 from flask import Blueprint, Response, request
 
-from products.models import get_all_categories, create_new_category, get_all_products
+from products.models import get_all_categories, create_new_category, get_all_products, create_new_product, get_product_by_id
 
 prods = Blueprint('prods',__name__,url_prefix='/prod')#estos nombre de rutas son ignorados
 
@@ -103,3 +103,29 @@ def get_products():
     RESPONSE_BODY["message"] = "Products list"
 
     return RESPONSE_BODY, 200
+
+@prods.route('/add-product',methods=["POST"])
+def addProduct():
+    """
+    
+    """
+    if request.method == "POST" :
+        data = request.json
+        create_new_product(data["name"],data["price"],data["weight"],data["description"],data["refundable"],data["category_id"])
+
+        RESPONSE_BODY["message"] = "Producto creado"
+        return RESPONSE_BODY, 200
+    RESPONSE_BODY["message"] = "Datos mal recibidos"
+    return RESPONSE_BODY, 400
+
+@prods.route('/search-product/<int:id>',methods=["GET"])
+def buscarProducto(id):
+    """
+    
+    """
+    product = get_product_by_id(id)
+
+    RESPONSE_BODY["data"] = product
+    RESPONSE_BODY["message"] = "Producto encontrado"
+
+    return RESPONSE_BODY,200
