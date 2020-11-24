@@ -10,11 +10,15 @@ sys.path.append('..')
 from conf.config import DevelopmentConfig
 from db import db, ma
 
+##from flask_migrate import Migrate
+
 #app.register_blueprint(prods)
 ACTIVE_ENDPOINTS = [('/products',prods)]
 
 def createApp(config=DevelopmentConfig):
-    app = Flask(__name__)
+    app = Flask(__name__,instance_relative_config=False)
+
+    #migrate = Migrate(app,db)
 
     app.config.from_object(config)
     
