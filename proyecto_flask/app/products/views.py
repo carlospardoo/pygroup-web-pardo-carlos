@@ -30,9 +30,11 @@ Se utiliza así:
         return render_template("hola.html",vars=variable)
 """
 
-from flask import Blueprint, Response, request
+from flask import Blueprint, Response, request, render_template, redirect, url_for
 
 from products.models import get_all_categories, create_new_category, get_all_products, create_new_product, get_product_by_id
+
+from products.forms import CreateCategoryForm
 
 prods = Blueprint('prods',__name__,url_prefix='/prod')#estos nombre de rutas son ignorados
 
@@ -129,3 +131,23 @@ def buscarProducto(id):
     RESPONSE_BODY["message"] = "Producto encontrado"
 
     return RESPONSE_BODY,200
+
+@prods.route('/success')
+def categoria_exitosa():
+    """
+    
+    """
+    return render_template('category_success.html')
+
+@prods.route('/create_category_form',methods=['GET','POST'])
+def create_category_form():
+    """
+    """
+    form_category = CreateCategoryForm()
+
+    if request.method == 'POST' and form_category.validate():
+        create_new_category(name=form_category.name.data)
+        return redirect(url_for('prods.categoria_exitosa'))
+
+    return render_template('create_category_form.html',form=form_category)
+

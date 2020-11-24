@@ -12,6 +12,8 @@ from db import db, ma
 
 ##from flask_migrate import Migrate
 
+from flask_wtf import CSRFProtect
+
 #app.register_blueprint(prods)
 ACTIVE_ENDPOINTS = [('/products',prods)]
 
@@ -20,10 +22,15 @@ def createApp(config=DevelopmentConfig):
 
     #migrate = Migrate(app,db)
 
+    #Proteccion CSRF
+    csrf = CSRFProtect(app)
+
     app.config.from_object(config)
     
     db.init_app(app)
     ma.init_app(app)
+
+    csrf.init_app(app)
 
     with app.app_context():#Contexto es db, serializacion, logs
         db.create_all()#Crea todas las tablas del contexto

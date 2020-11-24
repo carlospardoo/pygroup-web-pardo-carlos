@@ -11,6 +11,7 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    SECRET_KEY = 'hola'
 
 class TestingConfig(Config):
     TESTING = True
