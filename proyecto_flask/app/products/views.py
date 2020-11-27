@@ -151,3 +151,16 @@ def create_category_form():
 
     return render_template('create_category_form.html',form=form_category)
 
+@prods.route('/add-category-old',methods=["GET","POST"])
+def addCategoryOld():
+    """
+    """
+
+    if request.method == 'POST':
+        create_new_category(request.form["txtNombre"])
+        RESPONSE_BODY["data"] = request.form["txtNombre"]
+        RESPONSE_BODY["message"] = 'Se agregó la categoría {} con éxito'.format(request.form["txtNombre"])
+        
+        return RESPONSE_BODY, 200
+    return render_template('category_old_form.html')
+

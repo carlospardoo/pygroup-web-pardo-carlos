@@ -1,3 +1,4 @@
+import secrets
 #Configuración del entorno de desarrollo
 
 class Config(object):
@@ -11,7 +12,7 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SECRET_KEY = 'hola'
+    SECRET_KEY = secrets.token_hex(35)
 
 class TestingConfig(Config):
     TESTING = True

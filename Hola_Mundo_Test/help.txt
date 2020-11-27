@@ -12,6 +12,9 @@ python -m virtualenv test
 #Activar entorno virtual
 test\Scripts\activate
 
+env\Scripts\activate
+proyecto_flask\env\Scripts\activate
+
 #Instalar paquetes
 pip list
 
@@ -24,3 +27,6 @@ deactivate
 
 #Correr flask
 python URL
+
+#Iniciar base de datos
+flask db init

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Agregar una Categoría</title>
+    </head>
+    <body>
+        <h1>Agregue una categoría</h1>
+        <form method="POST" action="/products/add-category-old">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <label for="name">Nombre: </label>
+            <input type="text" id="txtNombre" name="txtNombre">
+            <input type="submit" id="btnEnviar" name="btnEnviar" value="Agregar">
+        </form>
+    </body>
+</html>
