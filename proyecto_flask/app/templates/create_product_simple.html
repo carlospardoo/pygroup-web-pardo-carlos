@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear Producto Formulario Simple</title>
+        <script type="text/javascript" src="{{url_for('static',filename='js/carga_categorias.js')}}"></script>
+    </head>
+    <body>
+        <form method="POST" action="/products/create-product-old-form">
+            
+            <label for="lblNombre">Nombre: </label>
+            <input type="text" name="txtNombre"><br>
+            <label for="lblPrecio">Precio: </label>
+            <input type="number" name="txtPrecio"><br>
+            <label for="lblPeso">Peso: </label>
+            <input type="number" name="txtPeso"><br>
+            <label for="lblDescripcion">Descripción: </label>
+            <textarea name="txtDescripcion"></textarea><br>
+            <label for="lblImagen">Imagen (Sin implementar aún): </label>
+            <img src="#" alt="imagen">
+            <button name="btnImagen">Examinar..</button>
+            <input type="text" name="txtImagen"><br>
+
+            <label for="lblReembolso">Reembolso: </label>
+            <select name="cmbReembolso">
+                <option name="tru" value="True">Si</option>
+                <option name="fals" value="False">No</option>
+            </select><br>
+
+            <label for="lblCategoria">Categoría: </label>
+            <select name="cmbCategoria">
+                
+            </select><br>
+
+            <input type="submit" value="Agregar Producto">
+        </form>
+    </body>
+</html>

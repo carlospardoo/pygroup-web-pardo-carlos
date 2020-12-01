@@ -2,6 +2,9 @@ from flask import Flask
 from products.views import prods
 #from app.products.views import products
 
+#Migraciones para mi
+#https://flask-migrate.readthedocs.io/en/latest/
+
 import sys
 sys.path.append('..')
 
@@ -38,8 +41,11 @@ def createApp(config=DevelopmentConfig):
     for url,blueprint in ACTIVE_ENDPOINTS:
         app.register_blueprint(blueprint,url_prefix=url)
     
+    print("Token: "+config.SECRET_KEY)
     return app
 
 if __name__ == '__main__':
     app_flask = createApp()
     app_flask.run()
+    
+

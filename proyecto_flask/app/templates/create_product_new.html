@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear Producto Formulario WTF</title>
+    </head>
+    <body>
+        <form method="POST" action="/products/">
+            {{form.csrf_token}}
+            {{form.name.label}} {{form.name(size=20)}}
+            <input type="submit" value="Agregar Producto">
+        </form>
+    </body>
+</html>

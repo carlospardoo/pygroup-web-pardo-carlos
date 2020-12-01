@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
-from wtforms.validators import DataRequired
+from wtforms import StringField, IntegerField
+from wtforms.validators import DataRequired, NumberRange, TextAreaField
 
 class CreateCategoryForm(FlaskForm):
     """
@@ -9,3 +9,10 @@ class CreateCategoryForm(FlaskForm):
     """
     #Crea un input type text, que dice Name y requiere tener datos (validador DataRequired())
     name = StringField('Name',validators=[DataRequired()])
+
+class CreateProductForm(FlaskForm):
+    nombre = StringField('txtNombre',validators=[DataRequired()])
+    precio = IntegerField('txtPrecio',validators=[DataRequired(), NumberRange(min=0)])
+    peso = IntegerField('txtPeso',validators=[NumberRange(min=1)])
+    descripcion = TextAreaField('txtDescripcion')
+

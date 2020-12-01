@@ -32,9 +32,19 @@ Se utiliza así:
 
 from flask import Blueprint, Response, request, render_template, redirect, url_for
 
-from products.models import get_all_categories, create_new_category, get_all_products, create_new_product, get_product_by_id
+from products.models import (
+    get_all_categories, 
+    create_new_category, 
+    get_all_products, 
+    create_new_product, 
+    get_product_by_id, 
+    create_new_stock,
+    update_stock
+)
 
 from products.forms import CreateCategoryForm
+
+from http import HTTPStatus
 
 prods = Blueprint('prods',__name__,url_prefix='/prod')#estos nombre de rutas son ignorados
 
@@ -164,3 +174,46 @@ def addCategoryOld():
         return RESPONSE_BODY, 200
     return render_template('category_old_form.html')
 
+@prods.route("/register-product-stock/<int:id>", methods=["PUT", "POST"])
+def register_product_refund_in_stock(id):
+
+    # TODO Complete this view to update stock for product when a register for
+    # this products exists. If not create the new register in DB
+    status_code = HTTPStatus.CREATED
+    if request.method == "PUT":
+        data = request.json
+        stock = update_stock(id,data["product_id"],data["quantity"])
+        #RESPONSE_BODY["data"] = stock
+        RESPONSE_BODY["message"] = \
+            "Stock for this product were updated successfully!"
+        status_code = HTTPStatus.OK
+    elif request.method == "POST":
+        data = request.json
+        #print('Datos: product id:'+str(id)+', quantity: '+str(data["quantity"]))
+        stock = create_new_stock(
+            id,
+            data["quantity"]
+        )
+
+        #RESPONSE_BODY["data"] = stock
+
+        RESPONSE_BODY["message"] = "Stock for this product were created successfully!"
+        #pass
+        #return RESPONSE_BODY, HTTPStatus.CREATED
+    else:
+        RESPONSE_BODY["message"] = "Method not Allowed"
+        status_code = HTTPStatus.METHOD_NOT_ALLOWED
+    
+    return RESPONSE_BODY, status_code
+
+@prods.route('/create-product-old-form',methods=["GET","POST"])
+def create_new_product_old_form():
+    """
+    """
+    if request.method == "POST":
+        print('code for post')
+        data = request
+        print(data)
+    return render_template('create_product_simple.html')
+
+#<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

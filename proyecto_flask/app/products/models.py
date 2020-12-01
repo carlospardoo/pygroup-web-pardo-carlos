@@ -43,6 +43,10 @@ class ProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Product
 
+class StockSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Stock
+
 def get_all_categories():
     categories = Category.query.all()#query select *from category
     category_schema = CategorySchema()#Definiendo el esquema para serializar
@@ -89,3 +93,46 @@ def get_product_by_id(id):
     p = product_schema.dump(product_qs)
     return p
 
+def create_new_stock(product_id,quantity):
+    """
+    """
+    product = Product.query.filter_by(id=product_id).first()
+    
+    if product != []:
+        stock = Stock(product_id=product_id,quantity=quantity)
+        db.session.add(stock)
+        if db.session.commit():
+            return stock
+    
+    return None
+
+def update_product(product_id,name,price,weight,description,refundable,category_id):
+    """
+    """
+    products = Product.query.filter_by(id=product_id).first()
+    products.name = name
+    products.price = price
+    products.weight = weight
+    #products.image = 
+    products.description = description
+    products.refundable = refundable #boolean
+    products.category_id = category_id
+    products.updated_at = datetime.now()
+
+    if db.session.commit():
+        return products
+    
+    return None
+
+def update_stock(stock_id,product_id,quantity):
+    """
+    """
+    stock = Stock.query.filter_by(id=stock_id).first()
+    stock.product_id = product_id
+    stock.quantity = quantity
+    stock.updated_at = datetime.now()
+
+    if db.session.commit():
+        return stock
+    
+    return None
