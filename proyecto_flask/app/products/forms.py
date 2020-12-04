@@ -1,6 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
-from wtforms.validators import DataRequired, NumberRange, TextAreaField
+from wtforms import (
+    StringField, 
+    IntegerField, 
+    TextAreaField, 
+    SelectField, 
+    SubmitField
+    )
+from wtforms.validators import DataRequired, NumberRange
 
 class CreateCategoryForm(FlaskForm):
     """
@@ -11,8 +17,11 @@ class CreateCategoryForm(FlaskForm):
     name = StringField('Name',validators=[DataRequired()])
 
 class CreateProductForm(FlaskForm):
-    nombre = StringField('txtNombre',validators=[DataRequired()])
-    precio = IntegerField('txtPrecio',validators=[DataRequired(), NumberRange(min=0)])
-    peso = IntegerField('txtPeso',validators=[NumberRange(min=1)])
-    descripcion = TextAreaField('txtDescripcion')
+    nombre = StringField('Nombre: ',validators=[DataRequired()])
+    precio = IntegerField('Precio: ',validators=[DataRequired(), NumberRange(min=0)])
+    peso = IntegerField('Peso: ',validators=[NumberRange(min=1)])
+    descripcion = TextAreaField('Descripción: ')
+    reembolso = SelectField('Reembolso: ',choices=[('true','Si'),('false','No')])
+    categoria = SelectField('Categorías: ',choices=[])
+    agregar = SubmitField('Agregar Producto')
 

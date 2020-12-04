@@ -7,7 +7,7 @@
     </head>
     <body>
         <form method="POST" action="/products/create-product-old-form">
-            
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <label for="lblNombre">Nombre: </label>
             <input type="text" name="txtNombre"><br>
             <label for="lblPrecio">Precio: </label>
@@ -23,8 +23,8 @@
 
             <label for="lblReembolso">Reembolso: </label>
             <select name="cmbReembolso">
-                <option name="tru" value="True">Si</option>
-                <option name="fals" value="False">No</option>
+                <option name="tru" value="true">Si</option>
+                <option name="fals" value="false">No</option>
             </select><br>
 
             <label for="lblCategoria">Categoría: </label>

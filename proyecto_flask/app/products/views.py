@@ -42,7 +42,7 @@ from products.models import (
     update_stock
 )
 
-from products.forms import CreateCategoryForm
+from products.forms import CreateCategoryForm, CreateProductForm
 
 from http import HTTPStatus
 
@@ -212,8 +212,54 @@ def create_new_product_old_form():
     """
     if request.method == "POST":
         print('code for post')
-        data = request
-        print(data)
+        data = request.json
+        create_new_product(
+                data["txtNombre"],
+                data["txtPrecio"],
+                data["txtPeso"],
+                data["txtDescripcion"],
+                data["cmbReembolso"],
+                data["cmbCategoria"]
+                )
+
+        RESPONSE_BODY["message"] = "Producto creado"
+        return RESPONSE_BODY, 201
     return render_template('create_product_simple.html')
+
+@prods.route('/create-product-wtf-form',methods=["GET","POST"])
+def create_new_product_wtf_form():
+    """
+    """
+    form_product = CreateProductForm()
+
+    if request.method == "POST" :
+        print('code for post')
+        data = request
+        print(form_product.nombre.data)
+        print(type(form_product.categoria.data))
+        if form_product.validate():
+            
+            
+            #data = request.json
+            create_new_product(
+                form_product.nombre.data,
+                form_product.precio.data,
+                form_product.peso.data,
+                form_product.descripcion.data,
+                form_product.reembolso.data,
+                form_product.categoria.data
+                )
+
+            RESPONSE_BODY["message"] = "Producto creado"
+            return RESPONSE_BODY, 201
+        RESPONSE_BODY["message"] = "Datos mal recibidos"
+        return RESPONSE_BODY, 400
+    categories = get_all_categories()
+    #print(categories[0]['name'])
+    cats_formato = []
+    for temporal in categories:
+        cats_formato.append((temporal['id'],temporal['name']))
+    form_product.categoria.choices = cats_formato
+    return render_template('create_product_new.html',formul=form_product)
 
 #<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
