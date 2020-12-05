@@ -212,16 +212,23 @@ def create_new_product_old_form():
     """
     if request.method == "POST":
         print('code for post')
-        data = request.json
-        create_new_product(
+        data = request.form
+        print(data)
+        reembol = False
+        #print(data["cmbReembolso"])
+        #print(type(data["txtNombre"]))
+        if data["cmbReembolso"] == 'true':
+           reembol = True
+        producto = create_new_product(
                 data["txtNombre"],
                 data["txtPrecio"],
                 data["txtPeso"],
                 data["txtDescripcion"],
-                data["cmbReembolso"],
+                reembol,
                 data["cmbCategoria"]
                 )
 
+        RESPONSE_BODY["data"] = producto
         RESPONSE_BODY["message"] = "Producto creado"
         return RESPONSE_BODY, 201
     return render_template('create_product_simple.html')
