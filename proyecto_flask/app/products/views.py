@@ -225,7 +225,7 @@ def create_new_product_old_form():
                 data["txtPeso"],
                 data["txtDescripcion"],
                 reembol,
-                data["cmbCategoria"]
+                int(data["cmbCategoria"])
                 )
 
         RESPONSE_BODY["data"] = producto
@@ -241,9 +241,22 @@ def create_new_product_wtf_form():
 
     if request.method == "POST" :
         print('code for post')
-        data = request
-        print(form_product.nombre.data)
+        #data = request
+        print(type(form_product.nombre.data))
+        print(type(form_product.precio.data))
+        print(type(form_product.peso.data))
+        print(type(form_product.descripcion.data))
+        print(type(form_product.reembolso.data))
         print(type(form_product.categoria.data))
+        #print(form_product)
+        reembol = False
+        #print(data["cmbReembolso"])
+        print(type(form_product.categoria.data))
+        if form_product.reembolso.data == 'true':
+           reembol = True
+        # print(type(form_product.categoria.data))
+        validado = form_product.validate()
+        print('validado?: '+str(validado))
         if form_product.validate():
             
             
@@ -253,19 +266,20 @@ def create_new_product_wtf_form():
                 form_product.precio.data,
                 form_product.peso.data,
                 form_product.descripcion.data,
-                form_product.reembolso.data,
+                reembol,
                 form_product.categoria.data
                 )
 
             RESPONSE_BODY["message"] = "Producto creado"
             return RESPONSE_BODY, 201
+        print(form_product.errors)
         RESPONSE_BODY["message"] = "Datos mal recibidos"
         return RESPONSE_BODY, 400
     categories = get_all_categories()
     #print(categories[0]['name'])
     cats_formato = []
     for temporal in categories:
-        cats_formato.append((temporal['id'],temporal['name']))
+        cats_formato.append((str(temporal['id']),temporal['name']))
     form_product.categoria.choices = cats_formato
     return render_template('create_product_new.html',formul=form_product)
 

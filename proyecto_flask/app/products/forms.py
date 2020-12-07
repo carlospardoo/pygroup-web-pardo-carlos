@@ -6,7 +6,7 @@ from wtforms import (
     SelectField, 
     SubmitField
     )
-from wtforms.validators import DataRequired, NumberRange
+from wtforms.validators import DataRequired, NumberRange, InputRequired
 
 class CreateCategoryForm(FlaskForm):
     """
@@ -17,11 +17,11 @@ class CreateCategoryForm(FlaskForm):
     name = StringField('Name',validators=[DataRequired()])
 
 class CreateProductForm(FlaskForm):
-    nombre = StringField('Nombre: ',validators=[DataRequired()])
-    precio = IntegerField('Precio: ',validators=[DataRequired(), NumberRange(min=0)])
-    peso = IntegerField('Peso: ',validators=[NumberRange(min=1)])
+    nombre = StringField('Nombre: ')
+    precio = StringField('Precio: ')
+    peso = StringField('Peso: ')
     descripcion = TextAreaField('Descripción: ')
     reembolso = SelectField('Reembolso: ',choices=[('true','Si'),('false','No')])
-    categoria = SelectField('Categorías: ',choices=[])
-    agregar = SubmitField('Agregar Producto')
+    categoria = SelectField('Categorías: ',validate_choice=False,choices=[])
+    #agregar = SubmitField('Agregar Producto')
 
