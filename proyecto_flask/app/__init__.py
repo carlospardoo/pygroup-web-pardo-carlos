@@ -13,17 +13,29 @@ sys.path.append('..')
 from conf.config import DevelopmentConfig
 from db import db, ma
 
-##from flask_migrate import Migrate
+from flask_migrate import Migrate, MigrateCommand#
+from flask_script import Manager #
 
 from flask_wtf import CSRFProtect
 
 #app.register_blueprint(prods)
 ACTIVE_ENDPOINTS = [('/products',prods)]
 
+def create_migrations():
+    """
+    Call it only when need to do a migrate
+    """
+    #Migraciones
+    migrate = Migrate(app,db)#
+    manager = Manager(app)
+    manager.add_command('db',MigrateCommand)
+    manager.run()
+
 def createApp(config=DevelopmentConfig):
     app = Flask(__name__,instance_relative_config=False)
 
-    #migrate = Migrate(app,db)
+    #Only uncomment if need a migrate
+    #create_migrations()
 
     #Proteccion CSRF
     csrf = CSRFProtect(app)
@@ -31,6 +43,7 @@ def createApp(config=DevelopmentConfig):
     app.config.from_object(config)
     
     db.init_app(app)
+    #ma = MarshMellow
     ma.init_app(app)
 
     csrf.init_app(app)

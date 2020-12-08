@@ -211,19 +211,19 @@ def create_new_product_old_form():
     """
     """
     if request.method == "POST":
-        print('code for post')
+        #print('code for post')
         data = request.form
-        print(data)
+        #print(data)
         reembol = False
         #print(data["cmbReembolso"])
         #print(type(data["txtNombre"]))
         if data["cmbReembolso"] == 'true':
            reembol = True
         producto = create_new_product(
-                data["txtNombre"],
-                data["txtPrecio"],
-                data["txtPeso"],
-                data["txtDescripcion"],
+                str(data["txtNombre"]),
+                int(data["txtPrecio"]),
+                int(data["txtPeso"]),
+                str(data["txtDescripcion"]),
                 reembol,
                 int(data["cmbCategoria"])
                 )
@@ -240,23 +240,23 @@ def create_new_product_wtf_form():
     form_product = CreateProductForm()
 
     if request.method == "POST" :
-        print('code for post')
-        #data = request
-        print(type(form_product.nombre.data))
-        print(type(form_product.precio.data))
-        print(type(form_product.peso.data))
-        print(type(form_product.descripcion.data))
-        print(type(form_product.reembolso.data))
-        print(type(form_product.categoria.data))
+        # print('code for post')
+        # #data = request
+        # print(type(form_product.nombre.data))
+        # print(type(form_product.precio.data))
+        # print(type(form_product.peso.data))
+        # print(type(form_product.descripcion.data))
+        # print(type(form_product.reembolso.data))
+        # print(type(form_product.categoria.data))
         #print(form_product)
         reembol = False
         #print(data["cmbReembolso"])
-        print(type(form_product.categoria.data))
+        #print(type(form_product.categoria.data))
         if form_product.reembolso.data == 'true':
            reembol = True
         # print(type(form_product.categoria.data))
         validado = form_product.validate()
-        print('validado?: '+str(validado))
+        #print('validado?: '+str(validado))
         if form_product.validate():
             
             
@@ -272,7 +272,7 @@ def create_new_product_wtf_form():
 
             RESPONSE_BODY["message"] = "Producto creado"
             return RESPONSE_BODY, 201
-        print(form_product.errors)
+        #print(form_product.errors)
         RESPONSE_BODY["message"] = "Datos mal recibidos"
         return RESPONSE_BODY, 400
     categories = get_all_categories()

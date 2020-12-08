@@ -9,7 +9,7 @@ class Product(db.Model):
     name = db.Column(db.String(50),nullable=False)
     price = db.Column(db.Integer,nullable=False)
     weight = db.Column(db.Integer,default=1)
-    #image = db.Column(db.String(500),default="https://acortar.link/3ZXKy")
+    image = db.Column(db.String(500),default="https://acortar.link/3ZXKy")
     description = db.Column(db.String(500),nullable=True)
     refundable = db.Column(db.Boolean,nullable=False)
     category_id = db.Column(db.Integer,db.ForeignKey('category.id'))

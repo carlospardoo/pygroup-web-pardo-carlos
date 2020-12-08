@@ -27,6 +27,16 @@ deactivate
 
 #Correr flask
 python URL
+python URL runserver
 
-#Iniciar base de datos
+#Iniciar migraciones para base de datos
 flask db init
+python app\__init__.py db init
+
+#Agregar migración
+flask db migrate -m "Mensaje"
+python app\__init__.py db migrate -m "Mensaje"
+
+#Confirmar Migración. Subir a la base de datos los cambios definidos en la migración
+flask db upgrade
+python app\__init__.py db upgrade
