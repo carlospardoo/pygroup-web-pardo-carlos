@@ -233,3 +233,93 @@ Felicitaciones! Trabajo exitoso carlos
 ```
 Error! No se puede utilizar el nombre pygroup
 ```
+
+### 4. Tarea Formularios
+
+1) Completar vista de registrar Stock (Métodos PUT y POST) que está en el repositorio marcada con un comentario TO-DO
+2) Generar dos formularios para la creación de un producto en la tienda:
+    a. Un formulario regular sin usar ninguna extensión de Flask
+    b. Un formulario usando Flask-WTF con validadores de los campos y mensajes de error.
+
+#### Instalación
+
+1. Instalar paquetes: Ejecutar archivo requirements.txt para instalar paquetes requeridos con el siguiente comando.
+
+```
+pip install -r requirements.txt
+```
+
+2. Migraciones: Para las migraciones se utilizaron los siguientes comandos.
+
+* Comando utilizado para crear directorio de migraciones. No volver a utilizar.
+
+```
+python app\__init__.py db init
+```
+
+El comando de flask es el siguiente.
+
+```
+flask db init
+```
+
+* Comando utilizado para crear una migración, definiendo los cambios a realizar sobre la base de datos.
+
+```
+python app\__init__.py db migrate -m "Mensaje"
+```
+
+El comando de flask es el siguiente.
+
+```
+flask db migrate -m "Mensaje"
+```
+
+* El comando para confirmar e implementar los cambios en la base de datos es el siguiente.
+
+```
+flask db upgrade
+```
+
+El comando de flask es el siguiente.
+
+```
+python app\__init__.py db upgrade
+```
+
+* Se debe tener en cuenta que se definió el método create_migrations() en el **__init__.py** para ejecutar migraciones. Sin embargo, debido a los conflictos de ejecución provocados por la librería que implementa, lo mejor es utilizarlo únicamente cuando se desee hacer una migración.
+
+#### Ejecutando las pruebas
+
+1. El primer punto de la tarea fue implementado en el método **register_product_refund_in_stock(id)** de views.py en el módulo products. Puede ser verificado en Postman o Imsomnia. Probado en Postman.
+
+2. 
+- Formulario sin uso de extensiones de flask puede ser accedido mediante la siguiente ruta.
+
+```
+http://localhost:5000/products/create-product-old-form
+```
+
+- Formulario que implementa Flask-WTF puede ser accedido mediante la siguiente ruta.
+
+```
+http://localhost:5000/products/create-product-wtf-form
+```
+
+Ambos formularios pueden ser implementados. Sin embargo, la carga y envío de las imágenes no se encuentra implementado.
+
+#### Despliegue
+
+1. Corriendo servidor y : Debido a que tengo problemas con las variable de entorno de flask, utilizo en mi máquina comandos de python para la ejecución. Sin embargo, se desconoce si los comandos de flask se pueden implementar apropiadamente.
+
+#### Construido con
+
+1. **flask-marshmallow** versión 0.14.0
+2. **Flask-SQLAlchemy** versión 2.4.4
+3. **marshmallow** versión 3.9.0
+4. **marshmallow-sqlalchemy** versión 0.24.0
+5. **six** versión 1.15.0
+6. **SQLAlchemy** versión 1.3.20
+7. **Flask-Migrate** versión 2.5.3
+8. **Flask-WTF** versión 0.14.3
+9. **Flask-Script** versión 2.0.6
