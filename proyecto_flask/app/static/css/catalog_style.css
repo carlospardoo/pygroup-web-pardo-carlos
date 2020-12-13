@@ -1,0 +1,10 @@
+.cajaProducto{
+    background-color: rgba(214, 214, 243, 0.85) !important;
+    margin: 10px;
+}
+.textoRojo{
+    color: red !important;
+}
+.textoAzul{
+    color: blue !important;
+}

@@ -42,6 +42,7 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
 class ProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Product
+        fields = ["id","name","price","description","image"]
 
 class StockSchema(ma.SQLAlchemyAutoSchema):
     class Meta:

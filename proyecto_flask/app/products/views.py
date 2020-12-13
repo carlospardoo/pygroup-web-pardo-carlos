@@ -284,3 +284,18 @@ def create_new_product_wtf_form():
     return render_template('create_product_new.html',formul=form_product)
 
 #<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+@prods.route('/show-catalog',methods=["GET"])
+def show_products_catalog():
+    """
+    1. Consultar la BD y extraer todos los productos disponibles
+    2. Almacenar la información en una variable de contexto
+    3. Renderizar la plantilla que tengamos en HTML e insertar los datos
+    de nuestra variable de contexto
+    """
+    #1.
+    products = get_all_products()
+    #2.
+    my_info = {"productos":products,"pygroup":"Pygroup hoy","carlos":1598}
+    return render_template('catalog.html',my_info=my_info)
+

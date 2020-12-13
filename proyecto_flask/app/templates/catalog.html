@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Comando para ajustar tamaño página a varios tipos de dispositivos-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <link href="{{url_for('static',filename='css/catalog_style.css')}}" rel="stylesheet" crossorigin="anonymous">
+    <title>Catálogo de Productos</title>
+</head>
+<body>
+    <h1>Catálogo de Producto (Pygroup)</h1>
+    <h3>Estos es un ejemplo de variables en Jinja2 {{my_info.pygroup}}</h3>
+    <div class="container">
+        {% for product in my_info.productos %}
+            <div class="row">
+                <div class="col-md-4 cajaProducto">
+                    <div class="row">Name: {{product.name}} </div>
+                    <div class="row"><img src="{{product.image}}" alt="Product Image"></div>
+                    <div class="row">Price: $<span {% if product.price > 3000 %} class="textoRojo" {% else %} class="textoAzul" {% endif %}>{{product.price}}</span> </div>
+                    <div class="row">Description: {{product.description}} </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
