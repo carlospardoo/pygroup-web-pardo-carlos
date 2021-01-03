@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %} Index {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="css">
+        .important{color:coral}
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>Index</h1>
+    <p class="important">
+        {% filter upper%}
+        Welcome to my awesome homepage.
+        {% endfilter %}
+        <br>
+        {{ tempValor|upper }}
+        <br>Welcome to my awesome filter2.
+        <br>
+        {{ tempValor|upper|list }}
+        <br>Welcome to my awesome filter3.
+        <br>
+        {{ tempValor|upper|list|sort }}
+        <br>Welcome to my awesome filter4.
+        <br>
+        {{ tempValor|replace("a","4") }}
+        <br>Welcome to my awesome filter5.
+        <br>
+        {{ tempValor2|datetimeformat }}
+        <br>Welcome to my awesome filter6.
+        <br>
+        {{ tempValor2|datetimeformat("%m/%d/%Y, %H:%M:%S") }}
+        <br>Welcome to my awesome filter7.
+    </p>
+{% endblock %}

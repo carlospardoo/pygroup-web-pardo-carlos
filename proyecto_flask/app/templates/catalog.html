@@ -11,17 +11,28 @@
 </head>
 <body>
     <h1>Catálogo de Producto (Pygroup)</h1>
-    <h3>Estos es un ejemplo de variables en Jinja2 {{my_info.pygroup}}</h3>
+    <h3>Esto es un ejemplo de variables en Jinja2 {{my_info.pygroup}}</h3>
     <div class="container">
         {% for product in my_info.productos %}
+            {% if my_info.productos.index(product)%3==0 %}
             <div class="row">
-                <div class="col-md-4 cajaProducto">
+            {% endif %}
+                <div class="col cajaProducto">
                     <div class="row">Name: {{product.name}} </div>
-                    <div class="row"><img src="{{product.image}}" alt="Product Image"></div>
+                    <div class="row"><img src="{{product.image}}" alt="Product Image" class="imagen"></div>
                     <div class="row">Price: $<span {% if product.price > 3000 %} class="textoRojo" {% else %} class="textoAzul" {% endif %}>{{product.price}}</span> </div>
                     <div class="row">Description: {{product.description}} </div>
+                    <div class="row">
+                        {% if product.refundable %}
+                            <h6>Refundable</h6>
+                        {% else %}
+                            <h6>Not refundable</h6>
+                        {% endif %}
+                    </div>
                 </div>
+            {% if my_info.productos.index(product)%3==2 %}
             </div>
+            {% endif %}
         {% endfor %}
     </div>
 </body>

@@ -48,6 +48,10 @@ def createApp(config=DevelopmentConfig):
 
     csrf.init_app(app)
 
+    @app.template_filter('datetimeformat')
+    def datetimeformat(value,format='%B'):
+        return value.strftime(format)
+
     with app.app_context():#Contexto es db, serializacion, logs
         db.create_all()#Crea todas las tablas del contexto
 

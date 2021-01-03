@@ -46,6 +46,8 @@ from products.forms import CreateCategoryForm, CreateProductForm
 
 from http import HTTPStatus
 
+from datetime import datetime
+
 prods = Blueprint('prods',__name__,url_prefix='/prod')#estos nombre de rutas son ignorados
 
 #Estándares de nuestro proyecto
@@ -299,3 +301,12 @@ def show_products_catalog():
     my_info = {"productos":products,"pygroup":"Pygroup hoy","carlos":1598}
     return render_template('catalog.html',my_info=my_info)
 
+@prods.route('/temp')
+def temp():
+    return render_template('child.html',tempValor='U')
+
+@prods.route('/temp2')
+def temp2():
+    tempValor = 'Hola, Buenos días'
+    tempValor2 = datetime.now()
+    return render_template('child.html',tempValor=tempValor,tempValor2=tempValor2)
