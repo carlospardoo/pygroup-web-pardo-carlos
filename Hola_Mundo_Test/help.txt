@@ -40,3 +40,12 @@ python app\__init__.py db migrate -m "Mensaje"
 #Confirmar Migración. Subir a la base de datos los cambios definidos en la migración
 flask db upgrade
 python app\__init__.py db upgrade
+
+
+#Correr pruebas con unittest
+pythom test_ejemplo.py
+pythom -m unittest test_ejemplo
+pythom -m unittest test_ejemplo.Test_Funciones
+pythom -m unittest test_ejemplo.Test_Funciones.test_primo
+python -m unittest -v test_ejemplo
+python -m unittest
