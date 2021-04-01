@@ -2,6 +2,8 @@ from datetime import datetime
 from flask import jsonify
 from db import db, ma
 
+from exceptions import ProductNotFoundError
+
 class Product(db.Model):
     """
     """
@@ -90,9 +92,12 @@ def create_new_product(name,price,weight,description,refundable,category_id):
 
 def get_product_by_id(id):
     product_qs = Product.query.filter_by(id=id).first()
-    product_schema = ProductSchema()
-    p = product_schema.dump(product_qs)
-    return p
+    if product_qs :
+        product_schema = ProductSchema()
+        p = product_schema.dump(product_qs)
+        return p
+    else:
+        raise ProductNotFoundError
 
 def create_new_stock(product_id,quantity):
     """

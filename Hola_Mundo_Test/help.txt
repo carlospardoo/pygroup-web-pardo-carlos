@@ -49,3 +49,6 @@ pythom -m unittest test_ejemplo.Test_Funciones
 pythom -m unittest test_ejemplo.Test_Funciones.test_primo
 python -m unittest -v test_ejemplo
 python -m unittest
+
+#Correr pruebas en pytest
+pytest

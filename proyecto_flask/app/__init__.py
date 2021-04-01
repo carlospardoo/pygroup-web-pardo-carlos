@@ -1,6 +1,6 @@
 from flask import Flask
-from products.views import prods
-#from app.products.views import products
+#from products.views import prods
+from app.products.views import prods
 
 #Migraciones para mi
 #https://flask-migrate.readthedocs.io/en/latest/
