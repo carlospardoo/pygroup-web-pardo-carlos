@@ -1,5 +1,6 @@
 from flask import Flask
 from products.views import prods
+from auth.views import auth
 #from app.products.views import products
 
 #Migraciones para mi
@@ -17,9 +18,10 @@ from flask_migrate import Migrate, MigrateCommand#
 from flask_script import Manager #
 
 from flask_wtf import CSRFProtect
+from flask_login import LoginManager
 
 #app.register_blueprint(prods)
-ACTIVE_ENDPOINTS = [('/products',prods)]
+ACTIVE_ENDPOINTS = [('/products',prods),('',auth)]
 
 def create_migrations():
     """
@@ -41,12 +43,18 @@ def createApp(config=DevelopmentConfig):
     csrf = CSRFProtect(app)
 
     app.config.from_object(config)
+
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
     
+    login_manager.init_app(app)
+
     db.init_app(app)
     #ma = MarshMellow
     ma.init_app(app)
 
     csrf.init_app(app)
+
 
     @app.template_filter('datetimeformat')
     def datetimeformat(value,format='%B'):
@@ -59,7 +67,13 @@ def createApp(config=DevelopmentConfig):
         app.register_blueprint(blueprint,url_prefix=url)
     
     print("Token: "+config.SECRET_KEY)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.filter(int(user_id))
+
     return app
+
 
 if __name__ == '__main__':
     app_flask = createApp()

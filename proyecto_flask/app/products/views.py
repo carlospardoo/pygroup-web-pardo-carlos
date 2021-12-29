@@ -31,7 +31,7 @@ Se utiliza así:
 """
 
 from flask import Blueprint, Response, request, render_template, redirect, url_for
-
+from flask_login import login_required
 from products.models import (
     get_all_categories, 
     create_new_category, 
@@ -287,6 +287,7 @@ def create_new_product_wtf_form():
 
 #<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
+@login_required
 @prods.route('/show-catalog',methods=["GET"])
 def show_products_catalog():
     """
